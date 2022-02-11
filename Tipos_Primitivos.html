@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Repositório de MySQL/Outros</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Meu Repositório</h1>
+        <p>Todo o Aprendizado guardado em um só lugar</p>
+    </header>
+    <nav>
+        <a href="Comandos.html">Comandos</a>
+        <a href="Constraints.html">Constraints</a>
+        <a href="Tipos_Primitivos.html">Tipos Primitivos</a>
+        <a href="Outras_Coisas.html">Outras Coisas</a>
+    </nav>
+    <main>
+        <article>
+            <h1>Tipos primitivos</h1>
+            <p>Os tipos primitivos são os tipos de dados, você usa tipos primitivos quando você cria ou muda um campo de uma tabela para dizer qual é o tipo de dado que vai ser inserido nele por exemplo</p>
+            <ul>
+                <li class="principal">Numérico</li>
+                <ul>
+                    <li>Inteiro</li>
+                    <ul>
+                        <li><abbr title="Guarda um número inteiro de -128 até 127 ">tinyint</abbr></li>
+                        <li><abbr title="Guarda um número inteiro de -32768 até 32767">smallint</abbr>
+                        </li>
+                        <li><abbr title="Guarda um número inteiro de -83886608 até 83886607">mediumint</abbr></li>
+                        <li><abbr title="Guarda um número inteiro de -2147483648 até 2147483647">int</abbr></li>
+                        <li><abbr title="Guarda um número inteiro de -9223372036854775808 até 9223372036854775807">bigint</abbr></li>
+                    </ul>
+                    <li>Real</li>
+                    <ul>
+                        <li><abbr title="Guarda um número real com casas antes da vírgula e depois da vírgula escolhidas na criação do campo">decimal</abbr></li>
+                        <li><abbr title="Guarda um número real, utiliza 4 bytes na memória">float</abbr></li>
+                        <li><abbr title="Guarda um número real, utiliza 8 bytes na memória">double</abbr></li>
+                        <li>real</li>
+                    </ul>
+                    <li>Lógico</li>
+                    <ul>
+                        <li>bit</li>
+                        <li>boolean</li>
+                    </ul>
+                </ul>
+                <li class="principal">Data/Tempo</li>
+                <ul>
+                    <ul>
+                        <li><abbr title="Guarda uma data com ano, mês e dia, nessa ordem separados por traços">date</abbr></li>
+                        <li>datetime</li>
+                        <li>timestamp</li>
+                        <li>time</li>
+                        <li><abbr title="Guarda um ano">year</abbr></li>
+                    </ul>
+                </ul>
+                <li class="principal">Literal</li>
+                <ul>
+                    <li>Caractere</li>
+                    <ul>
+                        <li><abbr title="Guarda um número fixo de caracteres, para escolher esse número, coloque o número dentro de um parentêses à direita do char">char</abbr></li>
+                        <li><abbr title="Guarda um número de caracteres que varia, coloque um parentêses à direita do varchar com o número máximo de caracteres">varchar</abbr></li>
+                    </ul>
+                    <li>Texto</li>
+                    <ul>
+                        <li><abbr title="Guarda um texto com um comprimento máximo de 255 caracteres">tinytext</abbr></li>
+                        <li><abbr title="Guarda um texto com um comprimento máximo de 65,535 caracteres">text</abbr></li>
+                        <li><abbr title="Guarda um texto com um comprimento máximo de 16,777,215 caracteres">mediumtext</abbr></li>
+                        <li><abbr title="Guarda um texto com um comprimento máximo de 4,294,967,295 caracteres">longtext</abbr></li>
+                    </ul>
+                    <li>Binário</li>
+                    <ul>
+                        <li>tinyblob</li>
+                        <li>blob</li>
+                        <li>mediumblob</li>
+                        <li>longblob</li>
+                    </ul>
+                    <li>Coleção</li>
+                    <ul>
+                        <li><abbr title="Dá opções de valores para serem guardados, só guarda um desses valores">enum</abbr></li>
+                        <li><abbr title="Dá opções de valores para serem guardados, pode guardar uma ou mais dessas opções">set</abbr></li>
+                    </ul>
+                </ul>
+                <li class="principal">Espacial</li>
+                <ul>
+                    <ul>
+                        <li>geometry</li>
+                        <li>point</li>
+                        <li>poligon</li>
+                        <li>multipoligon</li>
+                    </ul>
+                </ul>
+            </ul>
+            <p>lembrando que o que você vai usar para criar ou modificar campos são os tipos marcados com quadrados pretos, você não vai criar um campo colocando tipo "numérico" por exemplo, mas você pode criar um campo com o tipo "tinyint"</p>
+        </article>
+        <article>
+            <h1>Inteiro+</h1>
+            <p>Se você usar a constraint "unsigned" em um campo com qualquer um das subdivisões do tipo inteiro(ou seja, tinyint, smallint, mediumint, int e bigint), ele não vai aceitar valores negativos, e o alcance dos valores positivos vai aumentar</p>
+            <p>ou seja, se você cria um campo com o tipo tinyint e com a constraint unsigned, ele não vai aceitar valores negativos, mas agora ele vai aceitar valores positivos até 255, veja só como fica o alcance positivo de cada uma das subdivisões inteiras com a essa constraint:</p>
+            <ul>
+                <li>tinyint: 255</li>
+                <li>smallint: 65535</li>
+                <li>mediumint: 16777215</li>
+                <li>int: 4294967295</li>
+                <li>bigint: 18446744073709551615</li>
+            </ul>
+            <p>outra coisa, você pode limitar o alcance maximo dessas subdivisões colocando um parentêses com esse número, é claro que esse número não pode ultrapassar o limite normal</p>
+            <p>você não pode colocar um limite maximo de 300 em um tinyint por exemplo, mas você pode colocar 60, daí valores maiores que 60 não seram aceitos</p>
+        </article>
+        <article>
+            <h1>Caractere+</h1>
+            <p>A diferença dos tipos char e varchar é que o char é fixo e o varchar é váriavel</p>
+            <p>No char, você escolhe quantos caracteres serão inseridos, se for inserido menos caracteres do que devia o restante vai ser preenchido com espaços, ou seja, ele sempre vai consumir sempre o mesmo tanto de memória, mesmo sem ser preciso</p>
+            <p>No varchar você escolhe o máximo de caracteres que vão ser inseridos, mas se for inserido menos, ele vai excluir os espaços não usados, economizando muita memória</p>
+            <h1>Texto+</h1>
+            <p>A diferença de caracteres de textos é que caracteres são um nome ou algo de poucas palavras, já um texto é usado em descrições e textos longos, não confunda</p>
+        </article>
+        <article>
+            <h1>Real+</h1>
+            <p>A diferença dos tipos float, double e decimal são a precisão dos dados</p>
+            <p>O float e o double guardam qualquer número real, não é fixo, a diferença deles é quanta memória eles consomem</p>
+            <p>o float consome 4 bytes e tem um limite de casas decimais menor, já o double consome 8 bytes e tem um limite de casa decimais maior</p>
+            <p>o decimal é mais específico, e o mais útil na maioria dos casos, com ele você escolhe quantas casas o número vai ter no total, e quantas casas decimais ele vai ter</p>
+            <p>para usar o decimal você deve colocar um parentêses à direita dele, no parentêses você vai colocar dois número separados por uma vírgula, o primeiro é o total de casas no total, e o segundo é quantas casas decimais o número vai ter, para armazenar o número 128.35 por exemplo você precisa usar um <strong>decimal(5,2)</strong></p>
+            <p>se for armazenado um número com mais casas decimais do que o predefinido, o número vai ser arredondado</p>
+        </article>
+        <article>
+            <h1>Coleção+</h1>
+            <p>O enum e o set são muito parecidos, eles servem para limitar as possibilidades de dados que podem ser guardados naquele campo, ou seja, quando você usa enum ou set você pode escolher quais palavras são válidas para aquele campo</p>
+            <p>A única diferença é que em um campo enum você pode armazenar apenas um dos valores válidos, já no set você pode armazenar quantas opções você quiser</p>
+            <p>Para usar eles é fácil, você escreve um parênteses à direita deles com os valores permitidos, cada um entre aspas e separados por vírgulas, no enum apenas um desses valores será aceito, no set um ou mais desses valores será aceito</p>
+        </article>
+        <a href="#" id="link_para_voltar"><div id="botão_voltar">Voltar ao Inicio</div></a>
+    </main>
+    <footer>
+        
+    </footer>
+</body>
+</html>

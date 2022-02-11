@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Repositório de MySQL/Constraints</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Meu Repositório</h1>
+        <p>Todo o Aprendizado guardado em um só lugar</p>
+    </header>
+    <nav>
+        <a href="Comandos.html">Comandos</a>
+        <a href="Constraints.html">Constraints</a>
+        <a href="Tipos_Primitivos.html">Tipos Primitivos</a>
+        <a href="Outras_Coisas.html">Outras Coisas</a>
+    </nav>
+
+        <main>
+            <article>
+                <h1>Antes de tudo, o que são os sinais de # do repositório?</h1>
+                <p>Para exemplificar a sintaxe de comandos e constraints no repositório, eu vou usar sinais de # para indicar nomes ou palavras váriaveis</p>
+                <p>por exemplo, para explicar o comando create database eu vou mostrar isso: <strong>create database #nome do banco de dados#;</strong>, com esse exemplo de sintaxe, eu quero dizer que você vai usar "create database", daí o nome do banco de dados que você escolher,  daí ponto e vírgula, eu não quero dizer para você escrever exatamente "create database #nome do banco de dados#;", e sim para substituir os sinais de # e o que está dentro pelo nome do banco de dados de sua escolha, deu para entender</p>
+                <hr>
+                <h1>Criação de bancos de dados e tabelas</h1>
+                <hr>
+                <h2>Padrão de caracteres</h2>
+                <p><strong>default character set utf8mb4: </strong>permite o uso de caracteres latinos no banco, sempre use essa configuração quando você for criar um banco de dados</p>
+                <p><strong>default collate utf8mb4_general_ci: </strong>faz a mesma coisa que o default character set utf8mb4, sempre use essas duas constraints quando estiver criando seu banco de dados</p>
+                <p><strong>default charset = utf8mb4: </strong>permite o uso de caracteres latinos na tabela, sempre use isso quando for criar suas tabelas se elas tiverem palavras em português por exemplo, para usar ele você precisa coloca-lo depois do fechamento dos parentêses que contém os campos</p>
+                <hr>
+                <h2>Condições necessárias para a criação</h2>
+                <p><strong>if not exists: </strong>essa constraint é muito útil e você pode usar em muita coisa, por exemplo, se você usar if not exists quando você estiver criando um banco ou uma tabela, ele só vai criar o banco ou tabela <strong>se ele(a) ainda não existir</strong>, acho que ficou bem claro. Para usar ele na criação de uma tabela por exemplo, você precisa inserir ele no meio do table e do nome da tabela. Digamos que o nome é "minha_tabela", então você iria usar <strong>create table if not exists minha_tabela(campos);</strong>, desta forma ele só iria criar a tabela "minha_tabela" se ela ainda não existisse, você usa a mesma sintaxe com o banco</p>
+                <p><strong>if exists: </strong>essa constraint também é muito útil e dá para usar em vários casos, ela é o contrario do if not exists, quando você coloca ela quando estiver deletando um banco de dados ou tabela, ele(a) só vai ser deletado(a) se ele(a) existir. Para usar essa constraint você usa a mesma sintaxe que a anterior, digamos que queira deletar o banco de dados "meu_banco" só se ele existir, então você colocaria o if exists no meio do database e do nome do banco, ficaria <strong>drop database if exists meu_banco;</strong></p>
+                <hr>
+            </article>
+            <article>
+                <h1>Criação ou alteração de campos(colunas) de tabelas</h1>
+                <hr>
+                <p><strong>not null: </strong>impede que o campo seja nulo, ou seja, esse campo precisará ser preenchido com algo, mesmo que seja um espaço</p>
+                <hr>
+                <h2>Definindo o padrão caso nada seja inserido</h2>
+                <p><strong>default: </strong>define o valor padrão do campo, ou seja, se não for inserido nada, o campo receberá o valor padrão, para usar ele é só dar um espaço à direita dele e colocar o valor padrão entre aspas, ficando <strong>default '#exemplo de valor padrão#'</strong></p>
+                <p><strong>auto_increment: </strong>essa constraint é usada em campos de valores numéricos, ela faz uma contagem de um em um que vai ser usada no campo caso não seja inserido nada nele, todos os campos auto_increment devem ser uma chave. Por exemplo, digamos que você tenha o campo id, esse campo você definiu como int, not null, auto_increment e como uma primary key, se você não informar o id no primeiro registro, o id vai receber valor 1, no segundo registro valor 2, no terceiro valor 3, e assim vai, lembrando que isso só acontece se você não informar o id no caso, se você inserir o número 10 no id do quarto registro, o id do quinto registro vai ser 11, o sexto 12, deu pra entender</p>
+                <hr>
+                <h2>Definindo os campos chave</h2>
+                <p><strong>primery key: </strong>define um campo como chave primária, ou seja, esse campo vai ser único, não vão ter dois registros com o mesmo valor nesse campo, e esse campo vai ser usado para identificar cada registro. Para usar ele, você coloca ele em outro espaço do parentêses com os campo da tabela, como se fosse um campo diferente, com um parentêses à direita dele com o campo que você quer definir como chave primária. Digamos que o campo que você quer colocar como chave primária seja o campo 'id', então você daria uma vírgula e colocaria <strong>primary key (id)</strong>, como se fosse outro campo, e então o campo id iria virar uma chave primária</p>
+                <hr>
+                <h2>Tornando um campo único</h2>
+                <p><strong>unique: </strong>define um campo como único, campos únicos não podem ter dois registros com o mesmo valor. Se o campo "nome" for único por exemplo, não vão ter dois nomes iguais. Não confunda unique com primary key, um campo primary key é único, mas eles também é outras coisas, um campo unique não serve para identificar um registro</p>
+                <hr>
+                <h2>Proibindo números negativos</h2>
+                <p><strong>unsigned: </strong> em campos do tipo numérico, você pode proibir que sejam inseridos valores negativos usando a constraint unsigned,dessa forma o máximo de números positivos que podem ser inseridos é dobrado</p>
+            </article>
+            <a href="#" id="link_para_voltar"><div id="botão_voltar">Voltar ao Inicio</div></a>
+        </main>
+    
+    <footer>
+        
+    </footer>
+</body>
+</html>

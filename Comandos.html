@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Repositório de MySQL/Comandos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Meu Repositório</h1>
+        <p>Todo o Aprendizado guardado em um só lugar</p>
+    </header>
+    <nav>
+        <a href="Comandos.html">Comandos</a>
+        <a href="Constraints.html">Constraints</a>
+        <a href="Tipos_Primitivos.html">Tipos Primitivos</a>
+        <a href="Outras_Coisas.html">Outras Coisas</a>
+    </nav>
+
+        <main>
+            <article>
+                <h1>Entendendo banco de dados e tabelas</h1>
+                <p>O MySQL é um sistema de gerenciamento de banco de dados (SGBD), que utiliza a linguagem SQL</p>
+                <p>Um <strong>banco de dados</strong> é um local onde você pode armazenar dados , todo jogo tem um banco de dados por exemplo</p>
+                <p>Em um banco de dados existem <strong>tabelas</strong> que guardam os dados, é isso mesmo que você está pensando, uma tabela com linhas e colunas, uma tabela organiza os dados em <strong>campos</strong>, que são as colunas da tabela. Em um jogo por exemplo, toda característica de sua conta ocupa uma coluna de uma certa linha de uma tabela(todas na mesma linha, cada uma em uma coluna diferente, deu para entender).</p>
+                <p>Cada linha da tabela(linha horizontal) completa com dados é chamada de <strong>registro</strong></p>
+                <p>mas é claro que existem vários tipos de tabela em um jogo, eu só exemplifiquei com uma tabela que guarda as características de sua conta, mas existem muitas outras</p>
+                <hr>
+                <h1>Classificação dos Comandos</h1>
+                <p>a maioria dos comandos de MySQL tem classificações dependendo de sua função</p>
+                <p>as duas classificações mais comuns são DDl e DML</p>
+                <p>DDL significa "Database Definition Language", comandos DDL são comandos que interferem na ESTRUTURA de um banco de dados ou tabela, os campos de uma tabela são um exemplo de estrutura de uma tabela</p>
+                <p>DML significa "Database Manipulation Language", comandos DML são comandos que interferem nos DADOS de um banco de dados ou tabela, não na estrutura</p>
+                <hr>
+                <h1>Antes de tudo, o que são os sinais de # do repositório?</h1>
+                <p>Para exemplificar a sintaxe de comandos e constraints no repositório, eu vou usar sinais de # para indicar nomes ou palavras váriaveis</p>
+                <p>por exemplo, para explicar o comando create database eu vou mostrar isso: <strong>create database #nome do banco de dados#;</strong>, com esse exemplo de sintaxe, eu quero dizer que você vai usar "create database", daí o nome do banco de dados que você escolher,  daí ponto e vírgula, eu não quero dizer para você escrever exatamente "create database #nome do banco de dados#;", e sim para substituir os sinais de # e o que está dentro pelo nome do banco de dados de sua escolha, deu para entender</p>
+                <hr>
+                <h1>Criando banco de dados e tabelas</h1>
+                <h2>create database</h2>
+                <p>você usa o comando <strong>create database</strong>, de classificação DDL(por criar a ESTRUTURA do banco), para criar um banco de dados, a sintaxe é assim:</p>
+                <p><code>create database #nome do banco de dados#;</code></p>
+                <p>mas na maioria das vezes você vai colocar as constraints "default charset set utf8mb4" e "default collate utf8mb4_general_ci" para informar que o banco tem palavras latinas(como palavras brasileiras) e permitir caracteres acentuados no seu banco, para isso você vai usar a seguinte sintaxe:</p>
+                <p><code>create database #nome do banco de dados# <br> default character set utf8mb4 <br> default collate utf8mb4_general_ci;</code></p>
+                <p>sempre que seu banco de dados tiver palavras em português ou espanhol use essa sintaxe mais completa, isso evita muitos problemas</p>
+                <p>você pode criar um banco apenas se ele ainda não existir com o if not exists, adicionando com a sintaxe anterior fica:</p>
+                <p><code>create database if not exists #nome do banco de dados# <br> default character set utf8mb4 <br> default collate utf8mb4_general_ci;</code></p>
+                <h2>create table</h2>
+                <p>para criar uma tabela em um banco de dados, você usa o comando <strong>create table</strong> de classificação DDL, aqui está a sintaxe:</p>
+                <p><code>create table #nome da tabela#(#campos, seus tipos e suas constraints#);</code></p>
+                <p>Ao criar uma tabela, você precisa criar seus campos dentro dos parentêses depois do nome da tabela, ao criar um campo, você precisa informar o nome dele, o tipo e as constraints(as constraints são opcionais), nessa ordem, e lembrando que você tem que separar cada campo por vírgulas, preste atenção na sintaxe de exemplo para entender</p>
+                <p>digamos que queira criar uma tabela chamada 'minha_tabela', com os campos nome, que é do tipo varchar(20) e com a constraint 'not null', altura, que é do tipo decimal(3, 2), e genero, que é do tipo enum('M', 'F'), caso não conheça esses tipos primitivos, é só dar uma olhada na <a href="Tipos_Primitivos.html">página de tipos primitivos do repositório</a></p>
+                <p>dados os nomes dos campos e os tipos deles, para criar a tabela 'minha_tabela' com esses campos você faria assim:</p>
+                <p><code>create table minha_tabela(<br>nome varchar(20) not null, <br> altura decimal(3, 2),<br> genero enum('M', 'F')<br>);</code></p>
+                <p>você pode usar a constraint default charset utf8mb4 no final do comando, isso vai permitir caracteres acentuados e caracteres latinos na tabela, ficaria assim: </p>
+                <p><code>create table minha_tabela(<br>nome varchar(20) not null <br> altura decimal(3, 2) <br> genero enum('M', 'F')<br>) default charset =  utf8mb4;</code></p>
+                <p>sempre use isso quando sua tabela tiver palavras em português ou espanhol</p>
+                <p>você pode criar uma tabela apenas se ela ainda não existir com o if not exists, adicionando com a sintaxe anterior fica:</p>
+                <p><code>create table if not exists minha_tabela(<br>nome varchar(20) not null <br> altura decimal(3, 2) <br> genero enum('M', 'F')<br>) default charset =  utf8mb4;</code></p>
+                <hr>
+                <h1>Inserindo Dados em Tabelas</h1>
+                <p>Agora que você já aprendeu a montar a estrutura de uma tabela, vamos colocar dados nela</p>
+                <p>Para isso, usamos o <strong>insert into</strong>, da classificação DML</p>
+                <h2>informando a ordem que os valores serão passados(jeito completo)</h2>
+                <p>ele tem vários tipos de sintaxe, a sintaxe padrão dela é: </p>
+                <p><code>insert into #nome da tabela#(#campos#) values(#valores#)</code></p>
+                <p>você deve informar os campos separados por vírgulas no primeiro parênteses, e no segundo os valores, cada valor dentro de aspas e separados entre si por vírgulas</p>
+                <p>lembre-se, tudo que é dado no MySQL deve estar dentro de aspas</p>
+                <p>nessa sintaxe você informa no primeiro parênteses a ordem dos campos e no segundo você coloca os dados NA ORDEM dos campos inseridos no primeiro parênteses</p>
+                <p>nesse caso, os valores que você informou no segundo parentêses vão ser colocados respectivamente nos campos dos primeiros, ou seja, nessa sintaxe você pode escolher a ordem que os valores vão ser passados</p>
+                <h2>usando a ordem dos campos da tabela(jeito simplificado)</h2>
+                <p>se você for passar os valores na mesma ordem que os campos estão organizados na tabela você não precisa usar os primeiros parênteses, a sintaxe ficaria assim:</p>
+                <p><code>insert into #nome da tabela# values(#valores#)</code></p>
+                <h2>vários registros de uma vez</h2>
+                <p>invez de usar um insert into para cada registro que você fizer, você pode fazer todos os registros em um mesmo insert into, economizando muito tempo</p>
+                <p>Bom, nas sintaxes anteriores você pode ver que tem apenas um parentêses  com os dados depois do values, você pode colocar mais se você quiser, daí você separa cada parentêses com vírgulas entre eles, dessa forma você pode fazer quantos registros você quiser de uma vez só, isso funciona tanto com o jeito completo como o simplificado</p>
+                <p>lembre-se de colocar ; só depois do último parentêses</p>
+                <h2>Usando constraints</h2>
+                <p>invés de dar um valor para um certo campo, você também pode usar uma constraint</p>
+                <p>Por exemplo, digamos que você tenha o campo "id", ele é do tipo int e tem a constraint auto_increment, nesse caso se você não iria querer passar um número manualmente para esse campo porque ele é auto_increment, então ao invés de você colocar um número, você coloca <strong>default</strong>, daí o id receberia um valor com base no auto_increment, porque é o valor padrão(default) dele</p>
+                <p>outro exemplo, digamos que você tenha o campo "nacionalidade", ele é do tipo varchar(20) e tem a constraint default"Brasil", então se você quisesse que esse campo tivesse o valor padrão, você também poderia usar o default</p>
+                <p>IMPORTANTE: quando você usa constraints no insert, como o default, você não pode colocar ele dentro de aspas se não dá errado, use ele sem aspas</p>
+                <hr>
+                <h1>Selecionando um banco de dados</h1>
+                <p>quando você insere, muda, adiciona ou excluí informações em um banco de dados, você precisa selecionar ele, para isso você pode apertar duas vezes nele na parte de 'schemas', ou você pode usar o comando <strong>use</strong>, é só usar a sintaxe:</p>
+                <p><code>use #nome do banco de dados#;</code></p>
+                <p>quando você rodar esse comando, ele vai selecionar o banco de dados, daí depois você pode trabalhar com ele</p>
+                <p>lembrando uma coisa, digamos que você queira criar uma tabela em um banco, você usaria o comando use com esse banco SOZINHO, daí sim você pode criar a tabela</p>
+                <hr>
+                <h1>Alterando a Tabela</h1>
+                <h2>alter table</h2>
+                <p>Esse é o comando que usamos para alterar tabelas, ele é da classificação DDL</p>
+                <p>dá pra usar ele de várias formas</p>
+                <h3>add column</h3>
+                <p>o <strong>add column</strong> adiciona uma coluna nova(um campo novo) à tabela</p>
+                <p>a sintaxe: </p>
+                <p><code>alter table #nome da tabela#<br> add column #nome da coluna nova# #tipo e constraints, respectivamente#;</code></p>
+                <p>se você usar essa sintaxe, o campo vai ser adicionado ao final da tabela</p>
+                <p>Você pode usar o <strong>after</strong> para posicionar essa coluna nova DEPOIS de alguma coluna existente na tabela</p>
+                <p>a sintaxe fica assim:</p>
+                <p><code>alter table #nome da tabela# <br> add column #nome da coluna nova# #tipo e constraints, respectivamente# after #coluna já existente na tabela#;</code></p>
+                <p>Se você quiser posicionar o campo novo no Inicio da tabela, você usa o <strong>first</strong></p>
+                <p>olhe a sintaxe:</p>
+                <p><code>alter table #nome da tabela# <br> add column #nome da coluna# #tipo e constraints, respectivamente# first;</code></p>
+                <h3>drop column</h3>
+                <p>o <strong>drop column</strong> deleta uma coluna</p>
+                <p>veja a sintaxe:</p>
+                <p><code>alter table #nome da tabela#<br> drop column #nome da coluna#;</code></p>
+                <h3>modify column</h3>
+                <p>o <strong>modify column</strong> serve para mudar o tipo e as constraints de um campo, mas não dá pra mudar o nome, para mudar o nome você tem que usar o comando change column que já vamos ver</p>
+                <p>olhe a sintaxe:</p>
+                <p><code>alter table #nome da tabela# <br> modify column #nome da coluna# #tipos e constraints novos#;</code></p>
+                <p>e claro, você não pode deixar omitir o tipo se você quiser mudar só as constraints</p>
+                <p>por exemplo, digamos que você tenha a tabela pessoas, dentro dela você tem o campo nome, que é um varchar(20), e você quer adicionar a constraint not null, para isso você usaria "alter table pessoas modify column nome varchar(20) not null;" e não apenas "alter table pessoas modify column nome not null;", e aliás isso daria errado por causa do not null, mais pra baixo é falado sobre o problema e como resolver, confira!</p>
+                <h3>change column</h3>
+                <p>O <strong>change</strong> serve para mudar nome, tipo e constraints de um campo, ele não é muito útil quando você quer mudar só o nome ou só o tipo e/ou constraints porque dá muito trabalho, mas se seu objetivo é mudar tanto o nome quanto tipo e/ou constraints o change é pra você</p>
+                <p>a sintaxe dele: </p>
+                <p><code>alter table #nome da tabela# <br> change #nome antigo da coluna# #nome, tipo e contraint novos, respectivamente#;</code></p>
+                <p>Lembrando que você não pode omitir nada na parte de nome, tipo e constraints novos, o jeito que você colocar ali é como o campo vai ser, <a href="https://youtu.be/To9qUcEMuY0?t=707" target="_blank" rel="external">aqui um exemplo</a></p>
+                <h3>Um erro comum e como consertar</h3>
+                <p>Se você for criar ou modificar uma coluna e essa coluna tiver a nova constraint "not null" dará erro na hora da criação ou modificação porque os registros anteriores teriam o valor nulo nesse campo, e o campo não aceita valores nulos, veja uma <a href="https://youtu.be/To9qUcEMuY0?t=601" target="_blank" rel="external">aula do Guanabara sobre</a> </p>
+                <h3>rename to</h3>
+                <p>Se você não quiser mudar o nome de um campo em específico mas sim o nome da tabela inteira você usa o <strong>rename to</strong>, a sintaxe: </p>
+                <p><code>alter table #nome antigo da tabela# <br> rename to #nome novo da tabela#;</code></p>
+                <h3>add primary key()</h3>
+                <p>Você pode adicionar uma chave primária para a tabela caso você tenha esquecido disso na criação da tabela</p>
+                <p>para isso você usa o <strong>add primary key()</strong></p>
+                <p>a sintaxe:</p>
+                <p><code>alter table #nome da tabela# <br> add primary key(#nome do campo que você quer como chave primária#);</code></p>
+                <hr>
+                <h1>Alterando os dados da tabela</h1>
+                <h2>update</h2>
+                <p>o <strong>update</strong> é um DML e serve para mudar colunas de registros que já estão dentro da tabela</p>
+                <p>Para usar ele, você primeiro usa o set para indicar qual vai ser a mudança, e depois um where para indicar em qual linha vai acontecer essa mudança</p>
+                <p>no set você coloca o campo que vai ser mudado = o novo valor entre aspas</p>
+                <p>no where você coloca um campo que vai ser levado em consideração para definir em qual linha vai ser a mudança, veja só a sintaxe:</p>
+                <p><code>update #nome da tabela# <br> set #nome do campo a ser mudado# = '#novo valor do campo#' <br> where #nome do campo levado em consideração# = "valor do campo levado em consideração";</code></p>
+                <p>vamos fazer um exemplo, digamos que você tenha a tabela "pessoas", nela tem o campo "id" que é uma chave primária, na tabela pessoas tem vários registros, e você quer mudar o campo "nome" de um dos registros para "Gustavo", esse registro tem o id 15</p>
+                <p>então para fazer essa mudança você usaria a sintaxe:</p>
+                <p><code>uptade pessoas <br> set nome = 'Gustavo' <br> where id = '15';</code></p>
+                <p>Você pode mudar vários campos de um registro de uma vez só, mas as colunas do mesmo registro</p>
+                <p>para isso, você coloca todos os campos a serem mudados com seus novos valores, exatamente do jeito que você já aprendeu, mas você separa eles por vírgulas</p>
+                <p>mais um exemplo, você tem a mesma tabela pessoas, com vários registros, e você quer mudar o campo "nome" para "Mateus" e "nacionalidade" para "Brasil", isso no mesmo update, e o registro que você quer mudar tem o id 24, então você usaria:</p>
+                <p><code>update pessoas <br> set nome = 'Mateus', nacionalidade = 'Brasil' <br> where id = '24';</code></p>
+                <p>para evitar que você digite o campo errado no where e mais de um regstro seja alterado(sim, isso é possível e muito perigso), você pode usar <strong>limit 1</strong> no final do comando, sempre use o limit com o número de linhas que você deseja mudar</p>
+                <p>olha o exemplo anterior com o limit:</p>
+                <p><code>update pessoas <br> set nome = 'Mateus', nacionalidade = 'Brasil' <br> where id = '24' <br> limit 1;</code></p>
+                <h2>delete from</h2>
+                <p>o <strong>delete from</strong> serve para deletar um registro inteiro(ou vários), ele é da classificação DML</p>
+                <p>para usar ele você escolhe a tabela e depois usa um where para determinar qual(is) registros serão deletados, igual você faz com o update, ou seja, colocando um campo que será levado em consideração, olhe a sintaxe:</p>
+                <p><code>delete from #nome da tabela# <br> where #nome do campo levado em consideração# = '#valor campo levado em consideração#';</code></p>
+                <p>digamos que na tabela pessoas você queira eliminar os registros com o campo "ano" igual a 2060, então você usaria a sintaxe:</p>
+                <p><code>delete from pessoas <br> where ano = '2060';</code></p>
+                <p>no delete from você também pode usar o limit para ter mais segurança, olhe a mesma sintaxe com o limit:</p>
+                <p><code>delete from pessoas <br> where ano = '2060' <br> limit 1;</code></p>
+                <h2>truncate</h2>
+                <p>o <strong>truncate</strong> delete TODOS os dados de uma tabela, ele é da classificação DML é um comando incrivelmente perigoso, o truncate deleta os dados permanentemente</p>
+                <p>olha a sintaxe:</p>
+                <p><code>truncate table #nome da tabela#;</code></p>
+                <hr>
+                <h1>Informações</h1>
+                <h2>describe</h2>
+                <p>o describe 'descreve' uma tabela, ao usar o describe, ele vai mostrar as informações da ESTRUTURA da tabela(não dos registros), ou seja, dos campos</p>
+                <p>o describe mostra o nome, tipo, se pode ser nulo ou não, a chave, o padrão e algumas Informações extras de cada campo da tabela</p>
+                <p>é bem simples a sintaxe, olhe:</p>
+                <p><code>describe #nome da tabela#;</code></p>
+                <h2>select * from</h2>
+                <p>o select * from(que significa "selecionar tudo de") mostra todos os registros, ou seja, DADOS de uma tabela</p>
+                <p>essa sintaxe também é bem simples, observe: </p>
+                <p><code>select * from #nome da tabela#;</code></p>
+                <h2>show databases e show tables</h2>
+                <p>esses dois comandos são usados quando você está trabalhando com os seus bancos de dados no MySQL Console, não no Workbench</p>
+                <p>eles servem para ver os bancos de dados que seu servidor tem ou as tabelas que o banco de dados selecionado tem</p>
+                <p>para usa-los é simples, se você usar o seguinte comando vai aparecer uma tabelinha com os bancos de dados do servidor:</p>
+                <p><code>show databases;</code></p>
+                <p>e com o seguinte comando você verá todas as tabelas do banco de dados selecionado(precisa ter um banco de dados selecionado pelo comando 'use'):</p>
+                <p><code>show tables;</code></p>
+                <p>e lembrando mais uma vez, esses dois comandos só funcionam no MySQL Console, todos os outros comandos que já vimos podem ser usados tanto no workbench quanto no Console, esses só podem no console, então para mexer no console você pode usar os mesmos comandos do workbench, mas você terá que usar esses dois comandos para ver os banco de dados e tabelas porque  não aparece à esquerda da tela que nem no Workbench</p>
+                <hr>
+                <h1>Deletando banco de dados e tabelas</h1>
+                <h2>drop database</h2>
+                <p>o drop database(de classificação DDL) deleta um banco de dados da sua escolha, a sintaxe é bem simples, olhe:</p>
+                <p><code>drop database #nome do banco#;</code></p>
+                <p>mas tome cuidado, o drop database é um caminho sem volta, depois de deletar um banco de dados você não pode recuperar ele</p>
+                <h2>drop table</h2>
+                <p>funciona da mesma forma que o drop database, mas com tabelas. Ele também é da classificação DDL</p>
+                <p>olha que simples a sintaxe: </p>
+                <p><code>drop table #nome da tabela#;</code></p>
+                <p>você pode usar o if exists no drop table e no drop database para a tabela ou banco de dados só ser deletado se existir, confira isso na página de constraints</p>
+            </article>
+            <a href="#" id="link_para_voltar"><div id="botão_voltar">Voltar ao Inicio</div></a>
+        </main>
+    
+    <footer>
+        
+    </footer>
+</body>
+</html>
