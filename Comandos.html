@@ -21,7 +21,7 @@
 
         <main>
             <article>
-                <h1 class="recado">AINDA NÃO ACABOU O PRIMEIRO VÍDEO DE SELECT, ENSINAR COMO FILTRAR LINHAS</h1>
+                <h1 class="recado">AINDA NÃO ACABOU O PRIMEIRO VÍDEO DE SELECT, AINDA FALTA UM PEDAÇINHO DE COMO FILTRAR LINHAS, NÃO ESQUEÇA</h1>
                 <h1>Antes de Começar, Cadê a parte de PHPMyAdmin?</h1>
                 <p>bom, se você procurou coisas de PHPMyAdmin aqui e não achou, entenda que esse repositório tem a intenção de abordar os assuntos de comandos, o PHPMyAdmin é algo mais relacionado com ferramentas que facilitam o trabalho mas são dificeis de explicar com palavras, e além de que não adianta você aprender apenas a usar a ferramenta se você não sabe usar os comandos(dica de ouro do Guanabara)</p>
                 <p>o curso em vídeo tem uma aula específica falando sobre como usar os principais comandos, veja lá quando puder, o PHPMyAdmin é muito usado por empresas de hospedagem, não deixe ele de lado por favor, aqui está o <a href="https://youtu.be/EC_1ZtXsUtA" rel="external" target="_blank">link para a aula</a></p>
@@ -183,12 +183,20 @@
                 <p>a sintaxe fica:</p>
                 <p><code>select #colunas desejadas# from #nome da tabela#</code></p>
                 <p>Você também pode ordenar os resultados baseados em um campo com o <strong>order by</strong>, se o campo for literal a ordem vai ser alfabética, se for numeral a ordem vai ser ascendente(do menor ao maior), a sintaxe:</p>
-                <p><code>select #colunas desejadas# from #nome da tabela# order by #campo referente da ordem#</code></p>
+                <p><code>select #colunas desejadas# from #nome da tabela# <br> order by #campo referente da ordem#</code></p>
                 <p>se quiser que a ordem seja decrecente, é só colocar a palavra <strong>desc</strong> depois do campo de referência</p>
                 <p>e outra coisa, é possivel ordenar por um campo, e ainda ordenar por um segundo campo, sendo a prioridade do primeiro, para isso é só colocar os campos separados por vírgulas em ordem, ou seja, o mais importante primeiro e o menos importante depois</p>
                 <p>por exemplo, se você escolhe os campos de referência como nome e ano, primeiro vai ser ordenado por nome, daí os que tiverem o mesmo nome vão ser ordenados por ano</p>
                 <h3>Filtrar Linhas</h3>
-                <p>Já para filtrar linhas é preciso um pouco mais de trabalho, para isso nós vamos usar o operador já visto anteriormente <strong>where</strong>, </p>
+                <p>Já para filtrar linhas é preciso um pouco mais de trabalho, para isso nós vamos usar o operador já visto anteriormente <strong>where</strong>, nele nós vamos dar uma ou mais condições, como se fosse um 'if' da programação, e então todos as linhas que respeitem as condições vão ser impressas</p>
+                <p>é realmente muito parecido com o if, você pode usar uma grande variedade de operadores diferentes, entre eles estão: <strong>= > < != <= >= </strong>, olha a sintaxe:</p>
+                <p><code>select #colunas# from #nome da tabela# <br> where #condição# <br> order by #campo de ordenamento#</code></p>
+                <p>A maioria das condições envolve o valor de certos capos, veja dois exemplos:</p>
+                <p><code>select nome, preço, ano from jogos <br> where preço = '160'</code></p>
+                <p><code>select * from cursos <br> where ano >= '2017' <br> order by ano, nome</code></p>
+                <p>o where tem alguns operadores que o if não tem, como o <strong>between</strong> e o <strong>in</strong></p>
+                <p></p>
+                <p>Também é possível usar o <strong>and</strong>, e o <strong>or</strong></p>
                 <h2>show databases e show tables</h2>
                 <p>esses dois comandos são usados quando você está trabalhando com os seus bancos de dados no MySQL Console, não no Workbench</p>
                 <p>eles servem para ver os bancos de dados que seu servidor tem ou as tabelas que o banco de dados selecionado tem</p>
