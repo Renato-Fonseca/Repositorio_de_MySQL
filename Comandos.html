@@ -21,7 +21,7 @@
 
         <main>
             <article>
-                <h1 class="recado">AINDA NÃO ACABOU O PRIMEIRO VÍDEO DE SELECT, AINDA FALTA UM PEDAÇINHO DE COMO FILTRAR LINHAS, NÃO ESQUEÇA</h1>
+                <h1 class="recado">Ver segundo vídeo de select</h1>
                 <h1>Antes de Começar, Cadê a parte de PHPMyAdmin?</h1>
                 <p>bom, se você procurou coisas de PHPMyAdmin aqui e não achou, entenda que esse repositório tem a intenção de abordar os assuntos de comandos, o PHPMyAdmin é algo mais relacionado com ferramentas que facilitam o trabalho mas são dificeis de explicar com palavras, e além de que não adianta você aprender apenas a usar a ferramenta se você não sabe usar os comandos(dica de ouro do Guanabara)</p>
                 <p>o curso em vídeo tem uma aula específica falando sobre como usar os principais comandos, veja lá quando puder, o PHPMyAdmin é muito usado por empresas de hospedagem, não deixe ele de lado por favor, aqui está o <a href="https://youtu.be/EC_1ZtXsUtA" rel="external" target="_blank">link para a aula</a></p>
@@ -195,8 +195,27 @@
                 <p><code>select nome, preço, ano from jogos <br> where preço = '160'</code></p>
                 <p><code>select * from cursos <br> where ano >= '2017' <br> order by ano, nome</code></p>
                 <p>o where tem alguns operadores que o if não tem, como o <strong>between</strong> e o <strong>in</strong></p>
-                <p></p>
-                <p>Também é possível usar o <strong>and</strong>, e o <strong>or</strong></p>
+                <p>o between é usado para serem aceitados valores <strong>entre</strong> um número e outro em campos numéricos, como ficaria a sintaxe:</p>
+                <p><code>select #colunas# from #nome da tabela# <br> where #campo numérico# between #valor1# and #valor2#</code></p>
+                <p>um exemplo:</p>
+                <p><code>select * from cursos <br> where ano between '2014' and '2016'</code></p>
+                <p>Nesse caso, só seriam selecionadas as linhas com o campo ano entre 2014 e 2016, ou seja, as que tem ano como 2014, 2015, ou 2016(2014 e 2016 entram na contagem)</p>
+                <p>Já o in serve especificar certos valores, não para criar faixas. Você coloca parentêses ao lado dele e entre esses parentêses você coloca os valores, cada valor entre aspas e separados por virgulas entre si, olhe a sintaxe:</p>
+                <p><code>select #colunas# from #nome da tabela# <br> where #campo# in(#valores entre aspas#)</code></p>
+                <p>um exemplo:</p>
+                <p>select * from cursos <br> where ano in('2010', '2015','2018')</p>
+                <p>Nesse caso, só seriam selecionadas linhas com o campo ano igual a 2010, 2015, ou 2018</p>
+                <p>Também é possível usar o <strong>and</strong>, e o <strong>or</strong>, como em um if. Tudo isso que você viu acima é usado para formar uma condição, mas você pode fazer duas condições ou mais</p>
+                <p>com o and, você indica duas condições, e só vão ser selecionadas as linhas que cumprem uma <strong>E</strong> outra, olhe a sintaxe:</p>
+                <p><code>select #colunas# from #tabela# <br> where #condição1# and #condição2#</code></p>
+                <p>E aqui está um exemplo:</p>
+                <p><code>select * from cursos <br> where carga = '40' and ano = '2019'</code> <br> order by nome</p>
+                <p>nesse caso, só seriam selecionadas as linhas que tenham o campo carga como 40 <strong>E</strong> ano igual a 2019</p>
+                <p>Já com o or você pode selecionar linhas que cumpram uma condição <strong>OU</strong> outra, a sintaxe é parecida:</p>
+                <p>select #colunas# from #tabela# <br> where #condição1# or #condição2#</p>
+                <p>Exemplo:</p>
+                <p><code>select * from cursos <br> where carga = '40' or ano = '2019'</code> <br> order by nome</p>
+                <p>Neste exemplo, seriam selecionadas apenas as linhas que cumprem uma condição <strong>OU</strong> outra, ou seja, que tenham carga igual a 40 <strong>OU</strong> ano igual a 2019</p>
                 <h2>show databases e show tables</h2>
                 <p>esses dois comandos são usados quando você está trabalhando com os seus bancos de dados no MySQL Console, não no Workbench</p>
                 <p>eles servem para ver os bancos de dados que seu servidor tem ou as tabelas que o banco de dados selecionado tem</p>
