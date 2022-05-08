@@ -20,8 +20,9 @@
     </nav>
 
         <main>
+            <h1 class="recado">aula 3 de select: agrupar, agrupar agregando, clausula having, usando um select dentro do outro</h1>
             <article>
-                <h1 class="recado">Passar segundo vídeo de select para a wiki</h1>
+
                 <h1>Antes de Começar, Cadê a parte de PHPMyAdmin?</h1>
                 <p>bom, se você procurou coisas de PHPMyAdmin aqui e não achou, entenda que esse repositório tem a intenção de abordar os assuntos de comandos, o PHPMyAdmin é algo mais relacionado com ferramentas que facilitam o trabalho mas são dificeis de explicar com palavras, e além de que não adianta você aprender apenas a usar a ferramenta se você não sabe usar os comandos(dica de ouro do Guanabara)</p>
                 <p>o curso em vídeo tem uma aula específica falando sobre como usar os principais comandos, veja lá quando puder, o PHPMyAdmin é muito usado por empresas de hospedagem, não deixe ele de lado por favor, aqui está o <a href="https://youtu.be/EC_1ZtXsUtA" rel="external" target="_blank">link para a aula</a></p>
@@ -206,6 +207,11 @@
                 <p>um exemplo:</p>
                 <p><code>select * from cursos <br> where ano in('2010', '2015','2018');</code></p>
                 <p>Nesse caso, só seriam selecionadas linhas com o campo ano igual a 2010, 2015, ou 2018</p>
+                <p>Temos também o operador like, ele serve para selecionar apenas os registros com campos com valores em um padrão, não um valor exato como o =</p>
+                <p>Nós geralmente usamos o like com wildcards(explicado mais abaixo no repositório), olhe a sintaxe:</p>
+                <p><code>select #colunas# from #tabela# <br> where #campo# like #valor com letras e wildcards#;</code></p>
+                <p>Exemplo:</p>
+                <p>select * from gafanhotos <br> where nome like "f%"</p>
                 <p>Também é possível usar o <strong>and</strong>, o <strong>or</strong>, e o <strong>not</strong>, como em um if. Tudo isso que você viu acima é usado para formar uma condição, mas você pode fazer duas condições ou mais, e até reverter elas</p>
                 <p>com o and, você indica duas condições, e só vão ser selecionadas as linhas que cumprem uma <strong>E</strong> outra, olhe a sintaxe:</p>
                 <p><code>select #colunas# from #tabela# <br> where #condição1# and #condição2#;</code></p>
@@ -222,6 +228,73 @@
                 <p>Exemplo:</p>
                 <p><code>select nome from gafanhotos <br> where not nacionalidade = 'Brasil'</code></p>
                 <p>No caso, seriam selecionados os nomes das pessoas que <strong>não</strong> <abbr title="condição">nasceram no brasil</abbr>, ou seja, a condição "nacionalidade = 'Brasil'" é verdadeira para brasileiros, então com o not ela vai ser falsa pra brasileiros e verdadeira pra estrangeiros, deu pra "sacar"?</p>
+                <h3>Wildcards</h3>
+                <p>As wildcards servem para substituir uma ou mais letras em uma string e são usados~com o operador like</p>
+                <p>o <strong>%</strong> significa 'Qualquer coisa', ou seja, alguma coisa ou nada, essa wildcard pode substituir uma ou mais letras ou nada, olha um exemplo:</p>
+                <p><code>select * from gafanhotos <br> where nome like 'g%'</code></p>
+                <p>Nesse caso só seriam selecionados os registros em que o campo nome começe com a letra g, outro exemplo:</p>
+                <p><code>select * from gafanhotos <br> where nome like '%g'</code></p>
+                <p>nesse exemplo seriam selecionados os registros com nome que termine com g, mais um exemplo:</p>
+                <p><code>select * from gafanhotos <br> where nome like '%g%'; </code></p>
+                <p>Já nesse exemplo seriam selecionados os registros com um nome que tenha a letra g em qualquer lugar</p>
+                <p>Temos também a wildcard <strong>_</strong>, ela significa 'Alguma coisa', ou seja, tem que ser alguma coisa, não pode ser nada. O _ substitui apenas uma letra(ou número), então você tem que usar um _ para cada letra, um exemplo:</p>
+                <p><code>select * from cursos <br> where nome like 'P%PH_';</code></p>
+                <p>Neste caso seriam selecionados os registros que o nome começe com p, terminam com ph e mais algum caractere, que pode ser letra ou número, então php2 e photoshop5 seriam selecionados por exemplo</p>
+                <h3>Distinguindo</h2>
+                <p>Também é possível distinguir os dados de um campo, ou seja, mostrar cada dado de um campo uma unica vez, sem repetir, para isso usamos o distinct, sintaxe:</p>
+                <p><code>select distinct #campo a ser selecionado e distinguido# from #tabela#</code></p>
+                <p>é importante reparar que o mesmo campo que vai ser distinguido vai ser o único selecionado, um exemplo:</p>
+                <p><code>select distinct nacionalidade from gafanhotos;</code></p>
+                <p>Nesse caso vai ser selecionado o campo nacionalidade, mas só vão aparecer uma vez cada nacionalidade diferente na tabela, ou seja, não vão se repetir as nacionalidades 'Cubano' por exemplo</p>
+                <h3>Funções de Agregação</h2>
+                <p>Funções de agregação são funções SQL que permitem executar uma operação aritmética nos valores de uma coluna em todos os registros de uma tabela</p>
+                <p>A função <strong>count</strong> retorna o total de linhas selecionadas</p>
+                <p>A função <strong>sum</strong> retorna o total da soma de todos os valores do campo na tabela</p>
+                <p>A função <strong>avg</strong> retorna a média de todos os valores do campo na tabela</p>
+                <p>A função <strong>min</strong> retorna o menor dos valores do campo na tabela</p>
+                <p>A função <strong>max</strong> retorna o maior dos valores do campo na tabela</p>
+                <p>Lembre-se que as funções de agregação só funciona em campos numéricos</p>
+                <p>A sintaxe de funções de agregação é igual em todas elas, é só colocar a função e colocar o campo entre parentêses, olhe:</p>
+                <p><code>select #função#(#coluna#) from #tabela#</code></p>
+                <p>Um exemplo com count:</p>
+                <p><code>select count(nome) from gafanhotos</code></p>
+                <p>nesse exemplo, seria impresso quantos nomes existem na tabela, se tivessem 60 registros, apareceria o número 60. Valores null também entram na contagem no caso do count, mas não nas outras funções</p>
+                <h3>Agrupando</h3>
+                <p>Agrupar é criar grupos, para isso usamos a clausula <strong>group by</strong>, nela colocamos o campo que o agrupamento vai se basear, ou seja, o que vai acontecer é que o MySQL vai criar vários grupos, cada grupo tem registros com o mesmo valor do campo que o agrupamento vai se basear, sendo um grupo para cada diferente valor neste campo</p>
+                <p>se você simplismente der um select normal com group by, o resultado vai ser igual ao distinct, mas não é a mesma coisa</p>
+                <p>formando grupos, é possivel usar funções de agregação em cada grupo, coisa que seria impossivel com o distinct</p>
+                <p>isso acontece porque quando usamos funções de agregação, a função é exercida em cada linha, então podemos por exemplo contar quantos registros estão em cada grupo usando o count e o group by no mesmo select, observe esse exercicio:</p>
+                <pre>
+                    <p>1) Faça uma lista com as profissões dos gafanhotos e seus respectivos quantitativos.
+                        <code>
+                            select profissao, count(*) from gafanhotos
+                            where sexo = 'M'
+                            group by profissao;
+                        </code>
+                        </p>
+                </pre>
+                <p>neste caso, apareceria todas as diferentes profissões da tabela e quantas pessoas se encontram em cada um desses grupos</p>
+                <p>você pode fazer coisas parecidas com qualquer função de agregação, use-as bem</p>
+                <p>também existe uma clásula chamada <strong>having</strong>, ela serve para filtrar quais campos vão ser impressos baseado em uma ou mais condições, é que nem o where</p>
+                <p>lembre-se, where serve para impedir que os registros que não cumprem as condições dele sejam considerados e entrem nos grupos, já o having vai filtrar quais grupos devem ser expressos se baseando nas condições dele</p>
+                <p>olha a sintaxe do group by e do having:</p>
+                <pre>
+                    <p><code>select #colunas# from #tabelas#
+                        group by #campo de base para o agrupamento#
+                        having #condição(uma ou mais)#
+                    </select></code></p>
+                </pre>
+                <p>quando se trabalha com select, é possivel usar um select dentro do outro, olha esse exercicio:</p>
+                <pre><p>4) Faça uma lista agrupada pela altura dos gafanhotos, mostrando quantas pessoas pesam mais de
+                     100 kg e que estão acima da média de altura de todos os cadastrados.
+
+                    <code>
+                        select altura, count(*) from gafanhotos
+                        where peso > 100 and altura > (select avg(altura) from gafanhotos)
+                        group by altura;
+                    </code>
+                    </p></pre>
+                <p>neste caso, o select entre parentêses foi usado como a média de altura dos gafanhotos</p>
                 <h2>show databases e show tables</h2>
                 <p>esses dois comandos são usados quando você está trabalhando com os seus bancos de dados no MySQL Console, não no Workbench</p>
                 <p>eles servem para ver os bancos de dados que seu servidor tem ou as tabelas que o banco de dados selecionado tem</p>
