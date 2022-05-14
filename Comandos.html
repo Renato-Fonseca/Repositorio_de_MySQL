@@ -20,7 +20,6 @@
     </nav>
 
         <main>
-            <h1 class="recado">aula 3 de select: agrupar, agrupar agregando, clausula having, usando um select dentro do outro</h1>
             <article>
 
                 <h1>Antes de Começar, Cadê a parte de PHPMyAdmin?</h1>
@@ -303,6 +302,44 @@
                 <p>e com o seguinte comando você verá todas as tabelas do banco de dados selecionado(precisa ter um banco de dados selecionado pelo comando 'use'):</p>
                 <p><code>show tables;</code></p>
                 <p>e lembrando mais uma vez, esses dois comandos só funcionam no MySQL Console, todos os outros comandos que já vimos podem ser usados tanto no workbench quanto no Console, esses só podem no console, então para mexer no console você pode usar os mesmos comandos do workbench, mas você terá que usar esses dois comandos para ver os banco de dados e tabelas porque  não aparece à esquerda da tela que nem no Workbench</p>
+                <hr>
+                <h1>Modelo Relacional</h1>
+                <p>antes de começar a falar de modelo relacional, é importante que você veja a <a href="https://youtu.be/8fxKJWJcRTw?list=PLHz_AreHm4dkBs-795Dsgvau_ekxg8g1r" target="_blank" rel="external">aula 14 de MySQL do guanabara</a>, lá ele explica de forma única a parte teórica de modelo relacional básico</p>
+                <h2>Chave Estrangeira</h2>
+                <p>Bom, para relacionar duas tabelas é preciso uma chave estrangeira, uma chave estrangeira é uma chave primaria de outra tabela</p>
+                <p>Para criar uma chave estrangeira dentro de uma tabela, você primeiro precisa de um campo, que você pode criar com o alter table caso ele ainda não exista. Com o campo, pra transforma-lo em uma chave estrangeira você usa <strong>add foreign key()</strong> em um alter table e dentro dos parentêses coloca o campo chave estrangeira</p>
+                <p>além disso, no mesmo alter table você tem que usar uma cláusula <strong>references</strong>, nee você coloca a tabela em que a chave estrangeira é chave primária, e à direita um parentêses com qual campo dessa tabela é chave primária</p>
+                <p>Olha a sintaxe:</p>
+                <pre>
+                    <p><code>  alter table #tabela que vai ser inserido chave estrangeira#
+                        add foreign key(#campo chave estrangeira#)
+                        references #tabela de onde foi tirado a chave primária#(#campo chave primária da tabela à esquerda#)
+                    </code></p>
+                </pre>
+                <p>Exemplo:</p>
+                <pre><p><code>  alter table gafanhotos
+                    add foreign key(curso_preferido)
+                    references cursos(idcurso)
+                </code></p></pre>
+                <p>Neste caso, o campo 'curso_preferido' de gafanhotos vai se tornar uma chave estrangeira, e é relacionado ao campo 'idcurso' da tabela cursos</p>
+                <h2>Junções</h2>
+                <p>com a chave estrangeira, você pode juntar registros de uma tabela que são relacionados com registros de outra tabela, para isso você tem que usar um select com join e com uma clásula on</p>
+                <p>a cláusula on serve para indicar qual a relação que as tabelas tem, ela é obrigatória para que o resultado dê certo, nela você indica que a chave estrangeira da primeira tabela é igual a chave primária da segunda tabela, já vamos ver a sintaxe do on</p>
+                <p>depois de especificar a relação das tabelas com o on, você pode juntar as tabelas com algum tipo de join, existem 5 tipos de join, mas os que vamos aprender são o <strong>inner join</strong>, <strong>left join</strong>, e <strong>right join</strong></p>
+                <p>a partir do momento que você define um join, você pode selecionar colunas de ambas as tabelas no select(antes só dava pra selecionar as colunas da tabela do select), é só colocar o nome da tabela e um .(ponto) antes de cada coluna selecionada, então por exemplo se eu quiser mostrar os campos nome e profissao de gafanhotos e nome e ano de cursos, ficaria <strong>select gafanhotos.nome, gafanhotos.profissao, cursos.nome, cursos.ano from gafanhotos inner join cursos on gafanhotos.curso_preferido = cursos.idcurso;</strong>, já mostrando o uso do on</p>
+                <p>o inner join mostra as relações entre essas tabelas, não mostrando os registros sem relações de ambas as tabelas, o exemplo acima já mostra um exemplo com inner join, aqui está a sintaxe:</p>
+                <pre><p><code>  select #colunas# from #tabela esquerda# inner join #tabela direita#
+                on #chave estrangeira da tabela esquerda# = #chave primaria da tabela direita#;
+                </code></p></pre>
+                <p>O left join mostra todos registros da tabela da esquerda dele(mesmo os sem relação) e quais suas relações com os registros da tabela da direita, focando na tabela esquerda, sintaxe:</p>
+                <pre><p><code>  select #colunas# from #tabela esquerda# left join #tabela direita#
+                    on #chave estrangeira da tabela esquerda# = #chave primaria da tabela direita#;
+                    </code></p></pre>
+                <p>O right join faz a mesma coisa, mas com a tabela direita, ele vai mostrar todos os registros da tabela direita(mesmo os sem relação) e suas respectivas relações com os registros da tabela da esquerda, sintaxe:</p>
+                <pre><p><code>  select #colunas# from #tabela esquerda# right join #tabela direita#
+                    on #chave estrangeira da tabela esquerda# = #chave primaria da tabela direita#;
+                    </code></p></pre>
+                <p>Não se esqueça que todo campo que você indicar você precisa especificar de qual tabela pertence com aquele método que vimos naquele exemplo, até os da clásula on</p>
                 <hr>
                 <h1>Deletando banco de dados e tabelas</h1>
                 <h2>drop database</h2>
