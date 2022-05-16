@@ -340,6 +340,19 @@
                     on #chave estrangeira da tabela esquerda# = #chave primaria da tabela direita#;
                     </code></p></pre>
                 <p>Não se esqueça que todo campo que você indicar você precisa especificar de qual tabela pertence com aquele método que vimos naquele exemplo, até os da clásula on</p>
+                <h2>Relacionamento muitos_para_muitos</h2>
+                <p>A última aula do curso ensina como relacionar tabelas de tipo muitos_para_muitos na prática, para fazermos isso precisamos criar uma terceira tabela, onde temos uma chave estrangeira de cada uma das outras duas, lembre-se que para criar um campo chave estrangeira no create table é só criar o campo e dar um foreign key, é a mesma coisa que criar uma tabela com chave primaria</p>
+                <p>com a terceira tabela, podemos relacionar as três tabelas de uma vez só com um select com dois join(sim, isso é possivel), cada join com uma tabela e com um <strong>on</strong>relacionando a chave primária da tabela com sua respectiva chave estrangeira na tabela nova, é bem simples, olha:</p>
+                <pre><p>
+                    <code>select #colunas# from #tabela nova#
+                        join #tabela1#
+                        on #chave_primaria_tabela1# = #respectiva_chave_estrangeira_tabelaNova#
+                        join #tabela2#
+                        on #chave_primaria_tabela2# = #respectiva_chave_estrangeira_tabelaNova#
+                    </code>
+                </p></pre>
+                <p>lembrando que chaves estrangeiras tem que ter o mesmo tipo primitivo e constraints de suas respectivas chaves primaria, e lembrando também que qualquer coluna que você indicar você precisa falar de qual tabela é</p>
+                <p><strong>UMA DICA</strong>, você pode dar apelidos aos suas tabelas colocando alguma letra depois de indicar a tabela no select, essa letra pode substituir a tabela quando você for indicar de qual tabela é uma coluna</p>
                 <hr>
                 <h1>Deletando banco de dados e tabelas</h1>
                 <h2>drop database</h2>
